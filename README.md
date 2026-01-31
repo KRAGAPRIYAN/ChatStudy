@@ -73,6 +73,142 @@ Client-server chat applications are versatile tools that facilitate real-time co
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
 
+## Algorithm for Chat Server Program
+
+1.Start the program.
+
+2.Import the socket module.
+
+3.Create a TCP socket using socket(AF_INET, SOCK_STREAM).
+
+4.Assign the server IP address (127.0.0.1) and port number.
+
+5.Bind the socket to the specified IP address and port.
+
+6.Put the server socket into listening mode using listen().
+
+7.Wait for a client connection using accept().
+
+8.Display the client’s address after successful connection.
+
+9.Repeat the following steps until the client sends "exit":
+
+* Receive the message from the client using recv().
+
+* If the received message is "exit", terminate the chat.
+
+* Display the client message.
+
+* Read a message from the server user.
+
+* Send the server message to the client.
+
+10.Close the client connection.
+
+11.Close the server socket.
+
+12.Stop the program.
+
+
+## Algorithm for Chat Client Program
+
+1.Start the program.
+
+2.Import the socket module.
+
+3.Create a TCP socket using socket(AF_INET, SOCK_STREAM).
+
+4.Specify the server IP address (127.0.0.1) and port number.
+
+5.Connect to the server using connect().
+
+6.Display a message indicating successful connection.
+
+7.Repeat the following steps until the user enters "exit":
+
+* Read a message from the client user.
+
+* Send the message to the server.
+
+* If the message is "exit", terminate the chat.
+
+* Receive the reply from the server using recv().
+
+* Display the server message.
+
+8.Close the client socket.
+
+9.Stop the program.
+
+## PROGRAM
+
+chatserver.py
+
+```
+import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+host = '127.0.0.1'  
+port = 12345
+
+server_socket.bind((host, port))
+
+server_socket.listen(1)
+print("Server is waiting for connection...")
+
+conn, addr = server_socket.accept()
+print("Connected to client:", addr)
+
+while True:
+    client_msg = conn.recv(1024).decode()
+    if client_msg.lower() == "exit":
+        print("Client disconnected.")
+        break
+    print("Client:", client_msg)
+
+    server_msg = input("Server: ")
+    conn.send(server_msg.encode())
+
+conn.close()
+server_socket.close()
+```
+
+chatclient.py
+
+```
+import socket
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+host = '127.0.0.1'   
+port = 12345
+client_socket.connect((host, port))
+print("Connected to server.")
+
+while True:
+    msg = input("Client: ")
+    client_socket.send(msg.encode())
+
+    if msg.lower() == "exit":
+        break
+
+    server_reply = client_socket.recv(1024).decode()
+    print("Server:", server_reply)
+
+client_socket.close()
+```
+
+## OUTPUT
+
+Server-Side
+![alt text](<Screenshot 2026-01-31 082733.png>)
+
+Client-Side
+![alt text](<Screenshot 2026-01-31 082800.png>)
+
+Execution
+![alt text](<Screenshot 2026-01-31 082812.png>)
 
 ## Result:
 
