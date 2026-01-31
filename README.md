@@ -202,12 +202,15 @@ client_socket.close()
 ## OUTPUT
 
 Server-Side
+
 ![alt text](<Screenshot 2026-01-31 082733.png>)
 
 Client-Side
+
 ![alt text](<Screenshot 2026-01-31 082800.png>)
 
 Execution
+
 ![alt text](<Screenshot 2026-01-31 082812.png>)
 
 ## Result:
